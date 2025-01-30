@@ -1,6 +1,7 @@
 from flask import Flask  
 import os  
 import bot  # Impor file bot agar berjalan otomatis
+import threading
 import requests
 import time
 
@@ -19,10 +20,13 @@ def keep_alive():
             print(f"Ping gagal: {e}")
         time.sleep(600)  # Ping setiap 10 menit
 
-# Jalankan bot hanya sekali
+# Fungsi untuk menjalankan bot di thread terpisah
+def run_bot():
+    bot.bot.infinity_polling()
+
 if __name__ == "__main__":  
     threading.Thread(target=keep_alive, daemon=True).start()  # Keep-alive thread
-    bot.bot.infinity_polling()  # Jalankan bot di thread utama tanpa Gunicorn
-
+    threading.Thread(target=run_bot, daemon=True).start()  # Thread untuk bot Telegram
+    
     port = int(os.environ.get("PORT", 5000))  
     app.run(host="0.0.0.0", port=port)  # Jalankan Flask
