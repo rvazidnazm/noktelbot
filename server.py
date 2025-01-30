@@ -19,7 +19,7 @@ def run_bot():
 def keep_alive():
     while True:
         try:
-            requests.get("https://your-app.onrender.com")  # Ganti dengan URL Render-mu
+            requests.get("https://noktelbot.onrender.com")  # Ganti dengan URL Render-mu
         except Exception as e:
             print(f"Ping gagal: {e}")
         time.sleep(600)  # Ping setiap 10 menit
