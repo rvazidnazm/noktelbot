@@ -6,8 +6,6 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from dotenv import load_dotenv
 from datetime import datetime
 from telebot import types
-from keep_alive import keep_alive
-keep_alive()
 
 # Muat konfigurasi dari file .env
 load_dotenv()
