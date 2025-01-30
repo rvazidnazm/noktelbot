@@ -37,13 +37,11 @@ def webhook():
     bot.bot.process_new_updates([update])
     return 'ok'
 
+# Tidak perlu panggil app.run(), Gunicorn akan menjalankan ini
 if __name__ == "__main__":
     # Pastikan bot hanya dijalankan sekali
     threading.Thread(target=keep_alive, daemon=True).start()  # Keep-alive thread
     threading.Thread(target=run_bot, daemon=True).start()  # Thread untuk bot Telegram
-    
-    # Set webhook jika digunakan
-    set_webhook()
 
-    # Jangan panggil app.run() di sini jika menggunakan Gunicorn
-    # app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))  # Gunakan Gunicorn untuk menjalankan Flask
+    # Set webhook jika digunakan (hanya jika menggunakan webhook)
+    set_webhook()
