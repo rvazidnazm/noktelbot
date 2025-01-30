@@ -15,8 +15,6 @@ ADMIN_ID = int(os.getenv("ADMIN_ID"))
 
 # Inisialisasi bot
 bot = telebot.TeleBot(BOT_TOKEN)
-bot = Bot(token=os.getenv("BOT_TOKEN"))
-
 # Konfigurasi logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
