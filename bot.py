@@ -6,7 +6,6 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from dotenv import load_dotenv
 from datetime import datetime
 from telebot import types
-from flask import Flask, request
 
 # Muat konfigurasi dari file .env
 load_dotenv()
@@ -73,24 +72,6 @@ def simpan_nomor_pengguna(user_id, nomor):
 
 # Definisikan user_data di awal skrip
 user_data = {}
-
-#------------------
-app = Flask(__name__)
-
-@app.route("/", methods=["GET"])
-def home():
-    return "Bot Aktif!"
-
-@app.route("/" + BOT_TOKEN, methods=["POST"])
-def webhook():
-    update = telebot.types.Update.de_json(request.stream.read().decode("utf-8"))
-    bot.process_new_updates([update])
-    return "OK", 200
-
-if __name__ == "__main__":
-    bot.remove_webhook()
-    bot.set_webhook(url="https://noktelbot.onrender.com/" + BOT_TOKEN)  # Ganti dengan URL Render kamu
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
 # ------------------ KHUSUS ADMIN ------------------
 @bot.message_handler(commands=['broadcast'])
@@ -588,3 +569,4 @@ def home(call):
     save_user_state(call.from_user.id, "start")
     start(call.message)
         
+bot.infinity_polling()
