@@ -594,3 +594,6 @@ def home(call):
     # Kirim pesan utama setelah tombol home ditekan
     save_user_state(call.from_user.id, "start")
     start(call.message)
+
+print("Bot is polling...")
+bot.infinity_polling()
