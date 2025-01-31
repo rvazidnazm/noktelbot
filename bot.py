@@ -12,22 +12,6 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "Bot is running"
-
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
-    bot.reply_to(message, "Hello! I'm your bot.")
-
-def run_bot():
-    bot.infinity_polling()
-
-# Jalankan Flask dan bot secara bersamaan
-if __name__ == "__main__":
-    Thread(target=run_bot).start()
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
-
 def keep_alive():
     url = "https://noktelbot.onrender.com/"
     while True:
@@ -106,10 +90,24 @@ def simpan_nomor_pengguna(user_id, nomor):
 # Definisikan user_data di awal skrip
 user_data = {}
 
-#------------polling
-@bot.message_handler(commands=['start', 'help'])
+#------------
+@app.route('/')
+def home():
+    return "Bot is running"
+
+@bot.message_handler(commands=['start'])
 def send_welcome(message):
     bot.reply_to(message, "Hello! I'm your bot.")
+
+def run_bot():
+    bot.infinity_polling()
+
+# Jalankan Flask dan bot secara bersamaan
+if __name__ == "__main__":
+    Thread(target=run_bot).start()
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+    
+
     
 # ------------------ KHUSUS ADMIN ------------------
 @bot.message_handler(commands=['broadcast'])
