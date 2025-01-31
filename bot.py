@@ -13,13 +13,20 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def home():
+    return "Bot is running"
 
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "Hello! I'm your bot.")
+
+def run_bot():
+    bot.infinity_polling()
+
+# Jalankan Flask dan bot secara bersamaan
 if __name__ == "__main__":
-    # Mendapatkan port dari variabel lingkungan atau menggunakan 5000 sebagai fallback
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    Thread(target=run_bot).start()
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
 
 def keep_alive():
     url = "https://noktelbot.onrender.com/"
@@ -599,6 +606,3 @@ def home(call):
     # Kirim pesan utama setelah tombol home ditekan
     save_user_state(call.from_user.id, "start")
     start(call.message)
-
-print("Bot is polling...")
-bot.infinity_polling()
