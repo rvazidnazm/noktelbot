@@ -10,7 +10,7 @@ import requests
 import threading
 
 def keep_alive():
-    url = "https://<nama_service>.onrender.com/"
+    url = "https://noktelbot.onrender.com/"
     while True:
         try:
             requests.get(url)
