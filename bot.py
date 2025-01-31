@@ -6,6 +6,20 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from dotenv import load_dotenv
 from datetime import datetime
 from telebot import types
+import requests
+import threading
+
+def keep_alive():
+    url = "https://<nama_service>.onrender.com/"
+    while True:
+        try:
+            requests.get(url)
+            print("Ping berhasil")
+        except Exception as e:
+            print(f"Ping gagal: {e}")
+        threading.Timer(600, keep_alive).start()  # Ping setiap 10 menit
+
+keep_alive()
 
 # Muat konfigurasi dari file .env
 load_dotenv()
