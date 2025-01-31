@@ -178,7 +178,7 @@ def menu_beli_nomor(call):
 # ------------------ PROSES PEMBELIAN NOMOR ------------------
 @bot.callback_query_handler(func=lambda call: call.data == "proses_beli")
 def proses_beli(call):
-    teks = "🛒 Beli Nomor\nPilih jenis nomor yang ingin Anda beli :\n\n🌍 : Rp25.000\n🇮🇩 : Rp5.000\n\n🚨 BACA DULU INFORMASI YG DIBAWAH SEBELUM BELI !\n"
+    teks = "🛒 Beli Nomor\nPilih jenis nomor yang ingin Anda beli :\n\n🌍 : Rp25.000\n🇮🇩 : Rp7.000\n\n🚨 BACA DULU INFORMASI YG DIBAWAH SEBELUM BELI !\n"
     markup = InlineKeyboardMarkup(row_width=2)
         # Tombol kanan kiri di bawah Ketentuan
     markup.add(InlineKeyboardButton("🌍 Nomor Luar Negeri", callback_data="nomor_luar"), 
