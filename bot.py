@@ -99,6 +99,11 @@ def simpan_nomor_pengguna(user_id, nomor):
 # Definisikan user_data di awal skrip
 user_data = {}
 
+#------------polling
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+    bot.reply_to(message, "Hello! I'm your bot.")
+    
 # ------------------ KHUSUS ADMIN ------------------
 @bot.message_handler(commands=['broadcast'])
 def broadcast(message):
