@@ -18,11 +18,16 @@ def home():
 def webhook():
     try:
         json_update = request.get_json()
+        print(f"📩 Webhook menerima update: {json_update}")  # Log update dari Telegram
+        
         if json_update:
-            bot.process_new_updates([telebot.types.Update.de_json(json_update)])
+            update = telebot.types.Update.de_json(json_update)
+            bot.process_new_updates([update])
+            print("✅ Update berhasil diproses oleh bot")  # Log jika berhasil diproses
+        
         return "OK", 200
     except Exception as e:
-        print(f"❌ Error Webhook: {str(e)}")
+        print(f"❌ Error Webhook: {str(e)}")  # Log error jika terjadi masalah
         return "Internal Server Error", 500
 
 # Fungsi untuk mengatur webhook di thread terpisah
